@@ -1,0 +1,11 @@
+Bag-Software-Agent: bagit.py <http://github.com/libraryofcongress/bagit-python>
+Bagging-Date: 2015-02-18
+Payload-Oxum: 33009.6
+author: danames
+author_email: dan.ames@byu.edu
+hydroshare_version: R1 development
+resource_type: hs_core.GenericResource
+shortkey: 89ad487b7ca4496bb82cef694ba994d9
+slug: resource/89ad487b7ca4496bb82cef694ba994d9
+title: Major lakes of the US
+version: 2015.02.18.16.09.55

@@ -1,0 +1,14 @@
+# River Name: ONION
+# Reach Code: OC-1
+# Measure: 99400
+# Measure Units: ft
+# Stage Units: ft
+# Elevation Units: ft
+# Vertical Datum: unknown (assumed MSL)
+# Discharge Units: cfs
+Stage,Elevation,Discharge,Frequency
+0,524.4,0,0
+27.0983,551.4983,31700,10
+35.1634,559.5634,87500,20
+37.299,561.699,114600,100
+41.3075,565.7075,179600,500

@@ -1,0 +1,6 @@
+0c0474f01c2a982a185b5c76d5ff9395  data/resourcemap.xml
+6ac4099c6f51841aaac33c660d153288  data/resourcemetadata.xml
+88181237ec3a6f3fe95038b3f6bfa768  data/contents/lakes.DBF
+935a68664e7eca3a1e30dfe8d66a60d8  data/contents/lakes.SHP
+02571470348035ecdc0c45919d54beb1  data/contents/lakes.SHX
+e729936bf5360b37a15365fc295a1901  data/contents/lakes.prj

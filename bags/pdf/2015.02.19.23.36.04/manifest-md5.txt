@@ -1,0 +1,3 @@
+8de4ea25f77d3a296118c22546f26ae4  data/resourcemap.xml
+ed0dd648c5629f25a33255605a6d90b5  data/resourcemetadata.xml
+da0f5bbfbe08ccd204fd170fabb4fa6c  data/contents/HIC2014-1566.pdf

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rdf:RDF
+   xmlns:citoterms="http://purl.org/spar/cito/"
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:dcterms="http://purl.org/dc/terms/"
+   xmlns:foaf="http://xmlns.com/foaf/0.1/"
+   xmlns:hsterms="http://hydroshare.org/hydroshare/terms/"
+   xmlns:ore="http://www.openarchives.org/ore/terms/"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:rdfs1="http://www.w3.org/2001/01/rdf-schema#"
+>
+  <rdf:Description rdf:about="http://www.openarchives.org/ore/terms/Aggregation">
+    <rdfs1:label>Aggregation</rdfs1:label>
+    <rdfs1:isDefinedBy>http://www.openarchives.org/ore/terms/</rdfs1:isDefinedBy>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.openarchives.org/ore/terms/ResourceMap">
+    <rdfs1:isDefinedBy>http://www.openarchives.org/ore/terms/</rdfs1:isDefinedBy>
+    <rdfs1:label>ResourceMap</rdfs1:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="/tmp/hydroshare/89ad487b7ca4496bb82cef694ba994d9/2015.02.18.16.09.55/contents/lakes.DBF">
+    <dcterms:format>text/csv</dcterms:format>
+    <dcterms:isAggregatedBy>http://hydroshare.org/resources/Major lakes of the US/resourcemap.xml#aggregation</dcterms:isAggregatedBy>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://hydroshare.org/resources/Major lakes of the US/resourcemetadata.json">
+    <citoterms:documents>http://hydroshare.org/resources/Major lakes of the US/resourcemap.xml#aggregation</citoterms:documents>
+    <dcterms:format>application/rdf+xml</dcterms:format>
+    <dc:title>Dublin Core science metadata document describing the HydroShare resource</dc:title>
+    <dcterms:isAggregatedBy>http://hydroshare.org/resources/Major lakes of the US/resourcemap.xml#aggregation</dcterms:isAggregatedBy>
+  </rdf:Description>
+  <rdf:Description rdf:about="/tmp/hydroshare/89ad487b7ca4496bb82cef694ba994d9/2015.02.18.16.09.55/contents/lakes.SHX">
+    <dcterms:isAggregatedBy>http://hydroshare.org/resources/Major lakes of the US/resourcemap.xml#aggregation</dcterms:isAggregatedBy>
+    <dcterms:format>text/csv</dcterms:format>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://foresite-toolkit.googlecode.com/#pythonAgent">
+    <foaf:mbox>foresite@googlegroups.com</foaf:mbox>
+    <foaf:name>Foresite Toolkit (Python)</foaf:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://hydroshare.org/resources/Major lakes of the US/resourcemap.xml">
+    <dcterms:created>2015-02-18T16:09:56Z</dcterms:created>
+    <dc:format>application/rdf+xml</dc:format>
+    <dcterms:modified>2015-02-18T16:09:56Z</dcterms:modified>
+    <rdf:type rdf:resource="http://www.openarchives.org/ore/terms/ResourceMap"/>
+    <dcterms:identifier>resource_identifier</dcterms:identifier>
+    <dcterms:creator rdf:resource="http://foresite-toolkit.googlecode.com/#pythonAgent"/>
+    <ore:describes rdf:resource="http://hydroshare.org/resources/Major lakes of the US/resourcemap.xml#aggregation"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="/tmp/hydroshare/89ad487b7ca4496bb82cef694ba994d9/2015.02.18.16.09.55/contents/lakes.prj">
+    <dcterms:format>text/csv</dcterms:format>
+    <dcterms:isAggregatedBy>http://hydroshare.org/resources/Major lakes of the US/resourcemap.xml#aggregation</dcterms:isAggregatedBy>
+  </rdf:Description>
+  <rdf:Description rdf:about="/tmp/hydroshare/89ad487b7ca4496bb82cef694ba994d9/2015.02.18.16.09.55/contents/lakes.SHP">
+    <dcterms:isAggregatedBy>http://hydroshare.org/resources/Major lakes of the US/resourcemap.xml#aggregation</dcterms:isAggregatedBy>
+    <dcterms:format>text/csv</dcterms:format>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://hydroshare.org/resources/Major lakes of the US/resourcemap.xml#aggregation">
+    <ore:aggregates rdf:resource="/tmp/hydroshare/89ad487b7ca4496bb82cef694ba994d9/2015.02.18.16.09.55/contents/lakes.SHP"/>
+    <dc:title>Major lakes of the US</dc:title>
+    <hsterms:hydroshareResourceType>GenericResource</hsterms:hydroshareResourceType>
+    <ore:aggregates rdf:resource="/tmp/hydroshare/89ad487b7ca4496bb82cef694ba994d9/2015.02.18.16.09.55/contents/lakes.SHX"/>
+    <ore:aggregates rdf:resource="http://hydroshare.org/resources/Major lakes of the US/resourcemetadata.json"/>
+    <dcterms:created>2015.02.18.16.09.55</dcterms:created>
+    <ore:aggregates rdf:resource="/tmp/hydroshare/89ad487b7ca4496bb82cef694ba994d9/2015.02.18.16.09.55/contents/lakes.DBF"/>
+    <ore:isDescribedBy>http://hydroshare.org/resources/Major lakes of the US/resourcemap.xml</ore:isDescribedBy>
+    <ore:aggregates rdf:resource="/tmp/hydroshare/89ad487b7ca4496bb82cef694ba994d9/2015.02.18.16.09.55/contents/lakes.prj"/>
+    <ore:isDocumentedBy>http://hydroshare.org/resources/Major lakes of the US/resourcemetadata.json</ore:isDocumentedBy>
+    <rdf:type rdf:resource="http://www.openarchives.org/ore/terms/Aggregation"/>
+  </rdf:Description>
+</rdf:RDF>

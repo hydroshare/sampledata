@@ -1,0 +1,128 @@
+<?xml version="1.0"?>
+<!DOCTYPE rdf:RDF PUBLIC "-//DUBLIN CORE//DCMES DTD 2002/07/31//EN"
+"http://dublincore.org/documents/2002/07/31/dcmes-xml/dcmes-xml-dtd.dtd">
+<rdf:RDF xmlns:dcterms="http://purl.org/dc/terms/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:hsterms="http://hydroshare.org/terms/">
+  <rdf:Description rdf:about="http://192.168.59.103:8000/resource/01aa6b840e214cb68247f38232966f4e">
+    <dc:title>A Resource Centric Approach for Advancing Collaboration Through Hydrologic Data and Model Sharing</dc:title>
+    <dc:description>
+      <rdf:Description>
+        <dcterms:abstract>HydroShare is an online, collaborative system being developed for open sharing of hydrologic data and models.  The goal of HydroShare is to enable scientists to easily discover and access hydrologic data and models, retrieve them to their desktop or perform analyses in a distributed computing environment that may include grid, cloud or high performance computing model instances as necessary.  Scientists may also publish outcomes (data, results or models) into HydroShare, using the system as a collaboration platform for sharing data, models and analyses.  HydroShare is expanding the data sharing capability of the CUAHSI Hydrologic Information System by broadening the classes of data accommodated, creating new capability to share models and model components, and taking advantage of emerging social media functionality to enhance information about and collaboration around hydrologic data and models.  In an information system such as HydroShare, the way that information is represented, and exposed to programming interfaces, is fundamental in enhancing the functionality that can be supported.  One of the fundamental concepts in HydroShare is that of a resource.  In HydroShare, a resource serves, as the basic unit of content. The Resource Data Model supports specification of metadata common to all resources as well as creation of metadata and content specific to particular types of resources. Metadata are split into science and system metadata and are packaged in a format compatible with existing data repositories, such as DataOne. HydroShare resource types include different data types used in the hydrology community and also models and workflows.  Another fundamental concept in HydroShare is that of a Party, representing a person or organization that may be a resource creator or contributor, or a system user or group with access privileges for resources.  This paper describes the resource centric approach being used, presents the data models for resources and parties, and discusses the application programming interface functions used as a foundational interface layer in the architecture of the system for accessing resources.&#13;
+&#13;
+Tarboton, D. G., R. Idaszak, J. S. Horsburgh, J. Heard, D. Ames, J. L. Goodall, L. E. Band, V. Merwade, A. Couch, J. Arrigo, R. Hooper, D. Valentine and D. Maidment, (2014), "A Resource Centric Approach for Advancing Collaboration Through Hydrologic Data and Model Sharing," in (eds), 11th International Conference on Hydroinformatics, HIC 2014, New York City, USA, https://www.conftool.pro/hic2014/index.php?page=browseSessions&#160;</dcterms:abstract>
+      </rdf:Description>
+    </dc:description>
+    <dc:creator>
+      <rdf:Description>
+        <hsterms:name>David Tarboton</hsterms:name>
+        <hsterms:creatorOrder>1</hsterms:creatorOrder>
+      </rdf:Description>
+    </dc:creator>
+    <dc:creator>
+      <rdf:Description>
+        <hsterms:name>David G Tarboton</hsterms:name>
+        <hsterms:creatorOrder>2</hsterms:creatorOrder>
+      </rdf:Description>
+    </dc:creator>
+    <dc:creator>
+      <rdf:Description>
+        <hsterms:name>Ray Idaszak</hsterms:name>
+        <hsterms:creatorOrder>3</hsterms:creatorOrder>
+      </rdf:Description>
+    </dc:creator>
+    <dc:creator>
+      <rdf:Description>
+        <hsterms:name>Jeffery S Horsburgh</hsterms:name>
+        <hsterms:creatorOrder>4</hsterms:creatorOrder>
+      </rdf:Description>
+    </dc:creator>
+    <dc:creator>
+      <rdf:Description>
+        <hsterms:name>Jefferson Heard</hsterms:name>
+        <hsterms:creatorOrder>5</hsterms:creatorOrder>
+      </rdf:Description>
+    </dc:creator>
+    <dc:creator>
+      <rdf:Description>
+        <hsterms:name>Dan Ames</hsterms:name>
+        <hsterms:creatorOrder>6</hsterms:creatorOrder>
+      </rdf:Description>
+    </dc:creator>
+    <dc:creator>
+      <rdf:Description>
+        <hsterms:name>Jonathan L Goodall</hsterms:name>
+        <hsterms:creatorOrder>7</hsterms:creatorOrder>
+      </rdf:Description>
+    </dc:creator>
+    <dc:creator>
+      <rdf:Description>
+        <hsterms:name>Lawrence E Band</hsterms:name>
+        <hsterms:creatorOrder>8</hsterms:creatorOrder>
+      </rdf:Description>
+    </dc:creator>
+    <dc:creator>
+      <rdf:Description>
+        <hsterms:name>Venkatesh Merwade</hsterms:name>
+        <hsterms:creatorOrder>9</hsterms:creatorOrder>
+      </rdf:Description>
+    </dc:creator>
+    <dc:creator>
+      <rdf:Description>
+        <hsterms:name>Alva Couch</hsterms:name>
+        <hsterms:creatorOrder>10</hsterms:creatorOrder>
+      </rdf:Description>
+    </dc:creator>
+    <dc:creator>
+      <rdf:Description>
+        <hsterms:name>Jennifer Arrigo</hsterms:name>
+        <hsterms:creatorOrder>11</hsterms:creatorOrder>
+      </rdf:Description>
+    </dc:creator>
+    <dc:creator>
+      <rdf:Description>
+        <hsterms:name>Richard Hooper</hsterms:name>
+        <hsterms:creatorOrder>12</hsterms:creatorOrder>
+      </rdf:Description>
+    </dc:creator>
+    <dc:creator>
+      <rdf:Description>
+        <hsterms:name>David Valentine</hsterms:name>
+        <hsterms:creatorOrder>13</hsterms:creatorOrder>
+      </rdf:Description>
+    </dc:creator>
+    <dc:creator>
+      <rdf:Description>
+        <hsterms:name>David Maidment</hsterms:name>
+        <hsterms:creatorOrder>14</hsterms:creatorOrder>
+      </rdf:Description>
+    </dc:creator>
+    <dc:contributor>
+      <rdf:Description>
+        <hsterms:name>David Tarboton</hsterms:name>
+      </rdf:Description>
+    </dc:contributor>
+    <dc:date>
+      <dcterms:created>
+        <rdf:value>2014-07-22T07:25:02T-000022</rdf:value>
+      </dcterms:created>
+    </dc:date>
+    <dc:date>
+      <dcterms:modified>
+        <rdf:value>2015-02-19T11:36:04T-000019</rdf:value>
+      </dcterms:modified>
+    </dc:date>
+    <dc:format>application/pdf</dc:format>
+    <dc:identifier>
+      <rdf:Description>
+        <hsterms:hydroShareIdentifier>http://192.168.59.103:8000/resource/01aa6b840e214cb68247f38232966f4e</hsterms:hydroShareIdentifier>
+      </rdf:Description>
+    </dc:identifier>
+    <dc:language>eng</dc:language>
+    <dc:rights>
+      <rdf:Description>
+        <hsterms:rightsStatement>This resource is shared under the Creative Commons Attribution CC BY.</hsterms:rightsStatement>
+        <hsterms:URL rdf:resource="http://creativecommons.org/licenses/by/4.0/"/>
+      </rdf:Description>
+    </dc:rights>
+    <dc:subject>HydroShare Paper</dc:subject>
+  </rdf:Description>
+</rdf:RDF>

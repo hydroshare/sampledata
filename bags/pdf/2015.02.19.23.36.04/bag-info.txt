@@ -1,0 +1,11 @@
+Bag-Software-Agent: bagit.py <http://github.com/libraryofcongress/bagit-python>
+Bagging-Date: 2015-02-19
+Payload-Oxum: 295645.3
+author: dtarb
+author_email: dtarb@usu.edu
+hydroshare_version: R1 development
+resource_type: hs_core.GenericResource
+shortkey: 01aa6b840e214cb68247f38232966f4e
+slug: resource/01aa6b840e214cb68247f38232966f4e
+title: A Resource Centric Approach for Advancing Collaboration Through Hydrologic Data and Model Sharing
+version: 2015.02.19.23.36.04
