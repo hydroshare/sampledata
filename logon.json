@@ -36,6 +36,13 @@
         "type": "css selector",
         "value": "input.hl-btn.hl-btn-green"
       }
+    },
+    {
+      "type": "clickElement",
+      "locator": {
+        "type": "css selector",
+        "value": "div.col-md-12 > p"
+      }
     }
   ],
   "data": {
