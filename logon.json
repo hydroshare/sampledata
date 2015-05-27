@@ -33,43 +33,6 @@
     {
       "type": "clickElement",
       "locator": {
-        "type": "link text",
-        "value": "join HydroShare"
-      }
-    },
-    {
-      "type": "clickElement",
-      "locator": {
-        "type": "xpath",
-        "value": "//div[2]/div/div/form/fieldset/div[3]/div/input"
-      }
-    },
-    {
-      "type": "clickElement",
-      "locator": {
-        "type": "css selector",
-        "value": "#signin-menu > a"
-      }
-    },
-    {
-      "type": "setElementText",
-      "locator": {
-        "type": "id",
-        "value": "id_username"
-      },
-      "text": "viewer"
-    },
-    {
-      "type": "setElementText",
-      "locator": {
-        "type": "id",
-        "value": "id_password"
-      },
-      "text": "viewer"
-    },
-    {
-      "type": "clickElement",
-      "locator": {
         "type": "css selector",
         "value": "input.hl-btn.hl-btn-green"
       }
