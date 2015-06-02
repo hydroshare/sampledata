@@ -5,7 +5,7 @@
   "steps": [
     {
       "type": "get",
-      "url": "http://sandbox.hydroshare.org/"
+      "url": "${url}"
     },
     {
       "type": "clickElement",
@@ -20,7 +20,7 @@
         "type": "id",
         "value": "id_username"
       },
-      "text": "viewer"
+      "text": "${user_viewer}"
     },
     {
       "type": "setElementText",
@@ -28,7 +28,7 @@
         "type": "id",
         "value": "id_password"
       },
-      "text": "viewer"
+      "text": "${password_viewer}"
     },
     {
       "type": "clickElement",
@@ -46,9 +46,28 @@
     }
   ],
   "data": {
-    "configs": {},
-    "source": "none"
+    "configs": {
+      "manual": {
+        "url": "http://sandbox.hydroshare.org",
+        "user_viewer": "viewer",
+        "password_viewer": "viewer"
+      }
+    },
+    "source": "manual"
   },
-  "inputs": [],
+  "inputs": [
+    [
+      "url",
+      "string"
+    ],
+    [
+      "user_viewer",
+      "string"
+    ],
+    [
+      "password_viewer",
+      "string"
+    ]
+  ],
   "timeoutSeconds": 60
 }
