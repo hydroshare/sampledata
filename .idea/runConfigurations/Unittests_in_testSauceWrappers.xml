@@ -1,0 +1,35 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Unittests in testSauceWrappers" type="tests" factoryName="Unittests" nameIsGenerated="true">
+    <option name="INTERPRETER_OPTIONS" value="" />
+    <option name="PARENT_ENVS" value="true" />
+    <envs>
+      <env name="SELENIUM_PORT" value="80" />
+      <env name="SELENIUM_VERSION" value="31" />
+      <env name="SAUCE_USER_NAME" value="valentinedwv" />
+      <env name="SELENIUM_PLATFORM" value="Mac OS X 10.9" />
+      <env name="SELENIUM_BROWSER" value="chrome" />
+      <env name="SELENIUM_HOST" value="ondemand.saucelabs.com" />
+      <env name="SAUCE_API_KEY" value="7e3c4113-fffd-4bec-b374-1e5df59776e7" />
+    </envs>
+    <option name="SDK_HOME" value="" />
+    <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/webtests" />
+    <option name="IS_MODULE_SDK" value="true" />
+    <option name="ADD_CONTENT_ROOTS" value="true" />
+    <option name="ADD_SOURCE_ROOTS" value="true" />
+    <module name="sampledata" />
+    <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+    <option name="SCRIPT_NAME" value="D:\dev_hydroshare\sampledata\tests\simpletest.py" />
+    <option name="CLASS_NAME" value="testSauceWrappers" />
+    <option name="METHOD_NAME" value="" />
+    <option name="FOLDER_NAME" value="" />
+    <option name="TEST_TYPE" value="TEST_CLASS" />
+    <option name="PATTERN" value="" />
+    <option name="USE_PATTERN" value="false" />
+    <option name="PUREUNITTEST" value="true" />
+    <option name="PARAMS" value="SELENIUM_HOST=&quot;ondemand.saucelabs.com&quot;" />
+    <option name="USE_PARAM" value="false" />
+    <RunnerSettings RunnerId="PythonRunner" />
+    <ConfigurationWrapper RunnerId="PythonRunner" />
+    <method />
+  </configuration>
+</component>
