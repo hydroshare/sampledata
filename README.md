@@ -13,3 +13,8 @@ The bags are examples that can be utilized to populate an instance of irods, or 
 
 In ther future, this will include  scripts to popluate hydroshare instances, and run tests on the uploaded data.
 
+- - -
+Raw file layout
+
+Raw files should be inside a directory, even if they are stand alone.
+
