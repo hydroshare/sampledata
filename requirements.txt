@@ -3,3 +3,4 @@ selenium-saucelabs-python
 pytest
 pytest-xdist
 sauceclient
+hs_restclient
