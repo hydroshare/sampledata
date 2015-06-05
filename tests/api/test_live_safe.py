@@ -28,7 +28,7 @@ class TestGetResourceList(unittest.TestCase):
             self.auth = HydroShareAuthBasic(username=self.creator,password=self.creatorPassword)
         # items to look up. Present info from dev.hydroshare.org
         self.a_Title = os.environ['ResourceTitle'] if  os.environ.get('ResourceTitle') is not None else 'Logan DEM'
-        self.a_resource_id = os.environ['ResourceId'] if os.environ.get('ResourceId') is not None else 'e327f29ff92b4871a4a94556db7b7635'
+        self.a_resource_id = os.environ['ResourceId'] if os.environ.get('ResourceId') is not None else 'c33261b9c97049e6a1c0195c5447d3c1'
         self.a_resource_type = os.environ['ResourceType'] if os.environ.get('ResourceType') is not None else 'RasterResource'
         self.a_resource_filename = os.environ['ResourceName'] if os.environ.get('ResourceName') is not None else 'logan.tif'
         # create
