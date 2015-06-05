@@ -136,11 +136,11 @@ class TestGetResourceList(unittest.TestCase):
 
 # this needs a better setup. Assumes that a user will have some file as public.
     def test_get_resource_list_filter_creator_private(self):
-        hs = self.test_auth()
+        hs = HydroShare(hostname=self.url)
         res_list = hs.getResourceList(creator=self.creator)
         # should be a lambda to to this
         public_count = sum(1 for x in res_list)
-        hs_auth = HydroShare(hostname=self.url, auth=self.auth)
+        hs_auth = self.test_auth()
         res_list_auth = hs_auth.getResourceList(creator=self.creator)
         private_count = sum(1 for x in res_list_auth)
         self.assertGreater(private_count,public_count, "Private("+str(private_count)+") not greater than puhlic("+str(public_count)+") ")
