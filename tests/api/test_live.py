@@ -163,7 +163,8 @@ class TestGetResourceList(unittest.TestCase):
         success = False
         errorMessage = []
 
-
+        self.assertTrue(os.path.isfile(self.test_genericResource_path), "cannot find "+ self.test_genericResource_path + "at path: "+ os.curdir)
+        
         with  open(os.path.relpath(self.test_genericResource_path), 'r') as original:
         # Create
             newres = hs.createResource(rtype, title, resource_filename=original, keywords=keywords, abstract=abstract)
