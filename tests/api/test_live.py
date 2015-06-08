@@ -31,7 +31,9 @@ class TestGetResourceList(unittest.TestCase):
         self.test_genericResource_path = '../../raw/document/pdf/HIC2014-1566.pdf'
         if self.url.startswith('www'):
             raise unittest.SkipTest("No Live Tests on www")
-
+        expected_testpath = os.getcwd().endswith('api')
+        if not expected_testpath:
+            self.fail( "tests need to run from 'tests/api' current path is:" + os.getcwd())
 
 
     # def test_get_resource_list(self):
@@ -149,9 +151,8 @@ class TestGetResourceList(unittest.TestCase):
 # need to setup with a set list
     #NOTE: If some assertion fails, then you can end up with a created resource.
     # may need to do a separate set of cases where setUpModule creates, and tearDownModule.
-
-#@unittest.skipIf( self.url.startswith('www') ,
-#                     "No Live test on www.hydroshare.org")
+    # @unittest.skipUnless( os.getcwd().endswith('tests/api') ,
+    #                  "current path needs end with 'tests/api' path is" + os.getcwd() )
     def test_create_get_delete_resource(self):
         hs = self.test_auth()
 
@@ -163,7 +164,7 @@ class TestGetResourceList(unittest.TestCase):
         success = False
         errorMessage = []
 
-        self.assertTrue(os.path.isfile(self.test_genericResource_path), "cannot find "+ self.test_genericResource_path + "at cwd: "+ os.getcwd() )
+        self.assertTrue(os.path.isfile(self.test_genericResource_path), "cannot find "+ self.test_genericResource_path + " at cwd: "+ os.getcwd() + " directory should be tests/api" )
 
         with  open(os.path.relpath(self.test_genericResource_path), 'r') as original:
         # Create
