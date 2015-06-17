@@ -145,7 +145,7 @@ class TestGetResourceList(unittest.TestCase):
         hs_auth = self.test_auth()
         res_list_auth = hs_auth.getResourceList(creator=self.creator)
         private_count = sum(1 for x in res_list_auth)
-        self.assertGreater(private_count,public_count, "Private("+str(private_count)+") not greater than puhlic("+str(public_count)+") ")
+        self.assertGreater(private_count,public_count, "Private("+str(private_count)+") not greater than public("+str(public_count)+") ")
 
 # Create and delete
 # need to setup with a set list
@@ -230,3 +230,6 @@ class TestGetResourceList(unittest.TestCase):
 #         # Delete
 #         delres = hs.deleteResourceFile(res_id, fname)
 #         self.assertEqual(delres, res_id)
+
+if __name__ == '__main__':
+    unittest.main()
