@@ -203,12 +203,7 @@ class TestGetResourceList(unittest.TestCase):
         # Delete
         delres = hs.deleteResource(newres)
         self.assertEqual(delres, newres)
-        try:
-           sysmeta = hs.getSystemMetadata(newres)
-        except HydroShareNotFound:
-            print 'not there, ok'
-        except:
-            self.fail("HydroShareNotFound exception not returned, or File still exists")
+        self.assertRaises(HydroShareNotFound, hs.getSystemMetadata, (newres,))
 
 
 #     @with_httmock(mocks.hydroshare.resourceFileCRUD)
