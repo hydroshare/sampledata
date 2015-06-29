@@ -16,6 +16,11 @@ class TestGetResourceList(unittest.TestCase):
 
     def setUp(self):
         self.url = os.environ['HYDROSHARE'] if os.environ.get('HYDROSHARE') is not None else "dev.hydroshare.org"
+        self.use_https = os.getenv('USE_HTTPS', 'False')
+        if self.use_https == 'True':
+            self.use_https = True
+        else:
+            self.use_https = False
         # need to have some generic titles. Not sure how we can pass them
         self.creator = os.environ['Creator'] if os.environ.get('Creator') is not None else 'admin'
         self.creatorPassword = os.environ.get('CreatorPassword') # if it's empty, fail the auth tests
@@ -131,14 +136,14 @@ class TestGetResourceList(unittest.TestCase):
         self.assertIsNotNone(self.auth, "Auth not provided")
         hs = None
         try:
-            hs= HydroShare(hostname=self.url, auth=self.auth)
+            hs = HydroShare(hostname=self.url, auth=self.auth, use_https=self.use_https)
         except:
             self.fail("Authorized Connection Failed" + sys.exc_info()[0])
         return hs
 
 # this needs a better setup. Assumes that a user will have some file as public.
     def test_get_resource_list_filter_creator_private(self):
-        hs = HydroShare(hostname=self.url)
+        hs = HydroShare(hostname=self.url, use_https=self.use_https)
         res_list = hs.getResourceList(creator=self.creator)
         # should be a lambda to to this
         public_count = sum(1 for x in res_list)
