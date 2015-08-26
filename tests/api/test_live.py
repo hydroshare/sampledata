@@ -40,6 +40,11 @@ class TestGetResourceList(unittest.TestCase):
         if not expected_testpath:
             self.fail( "tests need to run from 'tests/api' current path is:" + os.getcwd())
 
+        print("HydroShare server: {0}".format(self.url))
+        print("Use HTTPS? {0}".format(self.use_https))
+        print("Creator: {0}".format(self.creator))
+        print("Creator password: {0}".format(self.creatorPassword))
+
 
     # def test_get_resource_list(self):
     #     success_title = False
