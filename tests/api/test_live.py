@@ -21,6 +21,9 @@ class TestGetResourceList(unittest.TestCase):
             self.use_https = True
         else:
             self.use_https = False
+
+        self.port = os.environ.get('PORT', None)
+
         # need to have some generic titles. Not sure how we can pass them
         self.creator = os.environ['Creator'] if os.environ.get('Creator') is not None else 'admin'
         self.creatorPassword = os.environ.get('CreatorPassword') # if it's empty, fail the auth tests
@@ -34,6 +37,8 @@ class TestGetResourceList(unittest.TestCase):
         self.a_resource_filename = os.environ['ResourceName'] if os.environ.get('ResourceName') is not None else 'logan.tif'
         # create
         self.test_genericResource_path = '../../raw/document/pdf/HIC2014-1566.pdf'
+        self.test_netcdfResource_path = '../../raw/netcdf_rapid_compliant/-nfiehydroZone-home-public-usgs-national-2015-08-19-national_2015-08-19.nc'
+
         if self.url.startswith('www'):
             raise unittest.SkipTest("No Live Tests on www")
         expected_testpath = os.getcwd().endswith('api')
@@ -135,14 +140,14 @@ class TestGetResourceList(unittest.TestCase):
         self.assertIsNotNone(self.auth, "Auth not provided")
         hs = None
         try:
-            hs = HydroShare(hostname=self.url, auth=self.auth, use_https=self.use_https)
+            hs = HydroShare(hostname=self.url, auth=self.auth, use_https=self.use_https, port=self.port)
         except:
             self.fail("Authorized Connection Failed" + sys.exc_info()[0])
         return hs
 
 # this needs a better setup. Assumes that a user will have some file as public.
     def test_get_resource_list_filter_creator_private(self):
-        hs = HydroShare(hostname=self.url, use_https=self.use_https)
+        hs = HydroShare(hostname=self.url, use_https=self.use_https, port=self.port)
         res_list = hs.getResourceList(creator=self.creator)
         # should be a lambda to to this
         public_count = sum(1 for x in res_list)
@@ -209,6 +214,19 @@ class TestGetResourceList(unittest.TestCase):
         self.assertEqual(delres, newres)
         self.assertRaises(HydroShareNotFound, hs.getSystemMetadata, (newres,))
 
+    def test_netcdf_resource_create(self):
+        hs = self.test_auth()
+
+        abstract = 'Abstract for rapid-compliant netcdf resource'
+        title = 'Minimal rapid-compliant netcdf resource'
+        keywords = ('rapid', 'NFIE', 'test')
+        rtype = 'NetcdfResource'
+        fname = self.test_netcdfResource_path
+
+        self.assertTrue(os.path.isfile(fname), "cannot find "+ fname + " at cwd: "+ os.getcwd() + " directory should be tests/api" )
+
+        newres = hs.createResource(rtype, title, resource_filename=fname, keywords=keywords, abstract=abstract)
+        self.assertIsNotNone(newres)
 
 #     @with_httmock(mocks.hydroshare.resourceFileCRUD)
 #     def test_create_get_delete_resource_file(self):
