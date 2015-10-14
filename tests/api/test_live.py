@@ -15,6 +15,7 @@ class TestGetResourceList(unittest.TestCase):
     # these will need to be replaced with some form of properties reader.
 
     def setUp(self):
+        self.resources_to_delete = []
         self.url = os.environ['HYDROSHARE'] if os.environ.get('HYDROSHARE') is not None else "dev.hydroshare.org"
         self.use_https = os.getenv('USE_HTTPS', 'False')
         if self.use_https == 'True':
@@ -44,6 +45,18 @@ class TestGetResourceList(unittest.TestCase):
         expected_testpath = os.getcwd().endswith('api')
         if not expected_testpath:
             self.fail( "tests need to run from 'tests/api' current path is:" + os.getcwd())
+
+    def tearDown(self):
+        # Try to make sure all created resources are cleaned up from iRODS
+        # by calling delete on them through the REST API.
+        hs = self.test_auth()
+        for res_id in self.resources_to_delete:
+            try:
+                del_res_id = hs.deleteResource(res_id)
+                assert(del_res_id == res_id)
+            except HydroShareNotFound:
+                # The resource was probably already deleted.
+                pass
 
     # def test_get_resource_list(self):
     #     success_title = False
@@ -178,6 +191,7 @@ class TestGetResourceList(unittest.TestCase):
         with  open(os.path.relpath(self.test_genericResource_path), 'r') as original:
         # Create
             newres = hs.createResource(rtype, title, resource_filename=original, keywords=keywords, abstract=abstract)
+            self.resources_to_delete.append(newres)
             self.assertIsNotNone(newres)
 
 
@@ -227,6 +241,7 @@ class TestGetResourceList(unittest.TestCase):
 
         newres = hs.createResource(rtype, title, resource_filename=fname, keywords=keywords, abstract=abstract)
         self.assertIsNotNone(newres)
+        self.resources_to_delete.append(newres)
 
 #     @with_httmock(mocks.hydroshare.resourceFileCRUD)
 #     def test_create_get_delete_resource_file(self):
