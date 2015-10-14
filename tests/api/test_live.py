@@ -148,6 +148,14 @@ class TestGetResourceList(unittest.TestCase):
     #                 break
     #         self.assertTrue(success, "did not find file")
 
+    def _create_resource_without_file(self, hs, abstract, title, keywords, rtype='GenericResource', is_public=False):
+        newres = hs.createResource(rtype, title, keywords=keywords, abstract=abstract)
+        assert(newres is not None)
+        self.resources_to_delete.append(newres)
+        if is_public:
+            hs.setAccessRules(newres, public=True)
+        return newres
+
 # auth tests
     def test_auth(self):
         self.assertIsNotNone(self.auth, "Auth not provided")
@@ -158,15 +166,30 @@ class TestGetResourceList(unittest.TestCase):
             self.fail("Authorized Connection Failed" + sys.exc_info()[0])
         return hs
 
-# this needs a better setup. Assumes that a user will have some file as public.
     def test_get_resource_list_filter_creator_private(self):
-        hs = HydroShare(hostname=self.url, use_https=self.use_https, port=self.port)
+        hs = self.test_auth()
+
+        # Create a public resource
+        self._create_resource_without_file(hs, abstract='This is a public resource',
+                                           title='My public resource', keywords=('this is public', 'a resource'),
+                                           is_public=True)
+
+        # Create two private resources
+        self._create_resource_without_file(hs, abstract='This is private resource 1',
+                                           title='My public resource, no. 1', keywords=('this is private', 'resource1'))
+        self._create_resource_without_file(hs, abstract='This is private resource 2',
+                                           title='My public resource, no. 2', keywords=('this is private', 'resource2'))
+
+        # Count public and private resources
+        public_count = 0
+        private_count = 0
         res_list = hs.getResourceList(creator=self.creator)
-        # should be a lambda to to this
-        public_count = sum(1 for x in res_list)
-        hs_auth = self.test_auth()
-        res_list_auth = hs_auth.getResourceList(creator=self.creator)
-        private_count = sum(1 for x in res_list_auth)
+        for res in res_list:
+            if res['public'] is True:
+                public_count += 1
+            else:
+                private_count += 1
+
         self.assertGreater(private_count,public_count, "Private("+str(private_count)+") not greater than public("+str(public_count)+") ")
 
 # Create and delete
