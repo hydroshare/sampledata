@@ -1,6 +1,8 @@
 __author__ = 'valentin'
 import os, sys
 import StringIO, zipfile
+import tempfile
+import shutil
 
 import unittest
 from datetime import date, datetime
@@ -49,7 +51,7 @@ class TestGetResourceList(unittest.TestCase):
     def tearDown(self):
         # Try to make sure all created resources are cleaned up from iRODS
         # by calling delete on them through the REST API.
-        hs = self.test_auth()
+        hs = self.get_hs_auth()
         for res_id in self.resources_to_delete:
             try:
                 del_res_id = hs.deleteResource(res_id)
@@ -156,8 +158,7 @@ class TestGetResourceList(unittest.TestCase):
             hs.setAccessRules(newres, public=True)
         return newres
 
-# auth tests
-    def test_auth(self):
+    def get_hs_auth(self):
         self.assertIsNotNone(self.auth, "Auth not provided")
         hs = None
         try:
@@ -166,8 +167,39 @@ class TestGetResourceList(unittest.TestCase):
             self.fail("Authorized Connection Failed" + sys.exc_info()[0])
         return hs
 
+    def get_hs_noauth(self):
+        hs = None
+        try:
+            hs = HydroShare(hostname=self.url, use_https=self.use_https, port=self.port)
+        except:
+            self.fail("Anonymous Connection Failed" + sys.exc_info()[0])
+        return hs
+
+    def test_get_public_resource_noauth(self):
+        hs = self.get_hs_auth()
+
+         # Create a public resource
+        newres_id = self._create_resource_without_file(hs, abstract='This is a public resource to be fetched noauth',
+                                                       title='My public resource noauth', keywords=('this is public', 'a resource', 'no auth'),
+                                                       is_public=True)
+
+        hs_noauth = self.get_hs_noauth()
+        # Get public resource as anonymous user
+        try:
+            tmp_dir = tempfile.mkdtemp()
+            hs_noauth.getResource(newres_id, destination=tmp_dir)
+            for f in os.listdir(tmp_dir):
+                if f.endswith('.zip'):
+                    fpath = os.path.join(tmp_dir, f)
+                    self.assertGreater(os.stat(fpath).st_size, 0)
+        finally:
+            shutil.rmtree(tmp_dir)
+
+
+
+# auth tests
     def test_get_resource_list_filter_creator_private(self):
-        hs = self.test_auth()
+        hs = self.get_hs_auth()
 
         # Create a public resource
         self._create_resource_without_file(hs, abstract='This is a public resource',
@@ -199,7 +231,7 @@ class TestGetResourceList(unittest.TestCase):
     # @unittest.skipUnless( os.getcwd().endswith('tests/api') ,
     #                  "current path needs end with 'tests/api' path is" + os.getcwd() )
     def test_create_get_delete_resource(self):
-        hs = self.test_auth()
+        hs = self.get_hs_auth()
 
         abstract = 'Abstract for hello world resource'
         title = 'Minimal hello world resource'
@@ -252,7 +284,7 @@ class TestGetResourceList(unittest.TestCase):
         self.assertRaises(HydroShareNotFound, hs.getSystemMetadata, (newres,))
 
     def test_netcdf_resource_create(self):
-        hs = self.test_auth()
+        hs = self.get_hs_auth()
 
         abstract = 'Abstract for rapid-compliant netcdf resource'
         title = 'Minimal rapid-compliant netcdf resource'
