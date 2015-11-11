@@ -357,6 +357,9 @@ class TestGetResourceList(unittest.TestCase):
         self.resources_to_delete.append(newres)
 
     def test_oauth2_authentication(self):
+        if self.client_id is None or self.client_secret is None:
+            self.skipTest("OAuth2 client ID/secret not specified.")
+
         hs = self.get_hs_oauth2()
 
         # Create a public resource
@@ -383,6 +386,9 @@ class TestGetResourceList(unittest.TestCase):
         self.assertGreater(private_count,public_count, "Private("+str(private_count)+") not greater than public("+str(public_count)+") ")
 
     def test_oauth2_authentication_token(self):
+        if self.client_id is None or self.client_secret is None:
+            self.skipTest("OAuth2 client ID/secret not specified.")
+
         hs = self.get_hs_oauth2_token()
 
         # Create a public resource
