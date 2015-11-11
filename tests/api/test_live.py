@@ -3,9 +3,9 @@ import os, sys
 import StringIO, zipfile
 import tempfile
 import shutil
-
 import unittest
-from datetime import date, datetime
+import json
+
 import requests
 
 from hs_restclient import HydroShare, HydroShareAuthBasic, HydroShareAuthOAuth2
@@ -13,6 +13,9 @@ from hs_restclient import  HydroShareNotFound,HydroShareNotAuthorized, HydroShar
 
 
 class TestGetResourceList(unittest.TestCase):
+
+    _TOKEN_URL_PROTO_WITHOUT_PORT = "{scheme}://{hostname}/o/token/"
+    _TOKEN_URL_PROTO_WITH_PORT = "{scheme}://{hostname}:{port}/o/token/"
 
     # these will need to be replaced with some form of properties reader.
 
@@ -201,6 +204,35 @@ class TestGetResourceList(unittest.TestCase):
             self.fail("OAuth2 Connection Failed" + str(sys.exc_info()[0]))
         return hs
 
+    def get_hs_oauth2_token(self):
+        hs = None
+        # Get token ourselves (i.e. without using oauthlib, etc.)
+        try:
+            if self.use_https:
+                scheme = 'https'
+            else:
+                scheme = 'http'
+            data = {'grant_type': 'password',
+                    'username': self.creator, 'password': self.creatorPassword}
+            if self.port:
+                token_url = self._TOKEN_URL_PROTO_WITH_PORT.format(scheme=scheme,
+                                                                   hostname=self.url,
+                                                                   port=self.port)
+            else:
+                token_url = self._TOKEN_URL_PROTO_WITHOUT_PORT.format(scheme=scheme,
+                                                                      hostname=self.url)
+            r = requests.post(token_url, data=data, auth=(self.client_id, self.client_secret),
+                              verify=self.verify)
+            token = json.loads(r.text)
+            oauth_token = HydroShareAuthOAuth2(self.client_id, self.client_secret,
+                                               self.url, use_https=self.use_https, port=self.port,
+                                               token=token)
+            hs = HydroShare(hostname=self.url, auth=oauth_token, use_https=self.use_https, verify=self.verify,
+                            port=self.port)
+        except:
+            self.fail("OAuth2 Connection Failed" + str(sys.exc_info()[0]))
+        return hs
+
     def test_get_public_resource_noauth(self):
         hs = self.get_hs_auth()
 
@@ -326,6 +358,32 @@ class TestGetResourceList(unittest.TestCase):
 
     def test_oauth2_authentication(self):
         hs = self.get_hs_oauth2()
+
+        # Create a public resource
+        self._create_resource_without_file(hs, abstract='This is a public resource',
+                                           title='My public resource', keywords=('this is public', 'a resource'),
+                                           is_public=True)
+
+        # Create two private resources
+        self._create_resource_without_file(hs, abstract='This is private resource 1',
+                                           title='My public resource, no. 1', keywords=('this is private', 'resource1'))
+        self._create_resource_without_file(hs, abstract='This is private resource 2',
+                                           title='My public resource, no. 2', keywords=('this is private', 'resource2'))
+
+        # Count public and private resources
+        public_count = 0
+        private_count = 0
+        res_list = hs.getResourceList(creator=self.creator)
+        for res in res_list:
+            if res['public'] is True:
+                public_count += 1
+            else:
+                private_count += 1
+
+        self.assertGreater(private_count,public_count, "Private("+str(private_count)+") not greater than public("+str(public_count)+") ")
+
+    def test_oauth2_authentication_token(self):
+        hs = self.get_hs_oauth2_token()
 
         # Create a public resource
         self._create_resource_without_file(hs, abstract='This is a public resource',
