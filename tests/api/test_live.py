@@ -356,6 +356,15 @@ class TestGetResourceList(unittest.TestCase):
         self.assertIsNotNone(newres)
         self.resources_to_delete.append(newres)
 
+        # Test resource type in system metadata
+        sysmeta = hs.getSystemMetadata(newres)
+        self.assertEqual(sysmeta['resource_type'], rtype)
+
+        # Test resource type in resource list
+        for resource in hs.getResourceList():
+            if resource['resource_id'] == newres:
+                self.assertEqual(resource['resource_type'], rtype)
+
     def test_oauth2_authentication(self):
         if self.client_id is None or self.client_secret is None:
             self.skipTest("OAuth2 client ID/secret not specified.")
