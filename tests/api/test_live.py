@@ -1,4 +1,8 @@
-__author__ = 'valentin'
+# Live tests of hs_restclient
+#
+# How to run locally:
+# USE_HTTPS=True HYDROSHARE=mill24.cep.unc.edu Creator=admin CreatorPassword=default CLIENT_ID=... CLIENT_SECRET=... VERIFY_CERTS=False nosetests test_live
+#
 import os, sys
 import StringIO, zipfile
 import tempfile
@@ -12,7 +16,7 @@ from hs_restclient import HydroShare, HydroShareAuthBasic, HydroShareAuthOAuth2
 from hs_restclient import  HydroShareNotFound,HydroShareNotAuthorized, HydroShareException,HydroShareHTTPException
 
 
-class TestGetResourceList(unittest.TestCase):
+class HydroShareTestCase(unittest.TestCase):
 
     _TOKEN_URL_PROTO_WITHOUT_PORT = "{scheme}://{hostname}/o/token/"
     _TOKEN_URL_PROTO_WITH_PORT = "{scheme}://{hostname}:{port}/o/token/"
@@ -66,7 +70,11 @@ class TestGetResourceList(unittest.TestCase):
         if not expected_testpath:
             self.fail( "tests need to run from 'tests/api' current path is:" + os.getcwd())
 
+        self.tmp_dir = tempfile.mkdtemp()
+
     def tearDown(self):
+
+        shutil.rmtree(self.tmp_dir)
         # Try to make sure all created resources are cleaned up from iRODS
         # by calling delete on them through the REST API.
         hs = self.get_hs_auth()
@@ -77,96 +85,6 @@ class TestGetResourceList(unittest.TestCase):
             except HydroShareNotFound:
                 # The resource was probably already deleted.
                 pass
-
-    # def test_get_resource_list(self):
-    #     success_title = False
-    #     success_id = False
-    #     hs = HydroShare(hostname=self.url)
-    #
-    #     res_list = hs.getResourceList()
-    #
-    #     for (i, r) in enumerate(res_list):
-    #         if (r['resource_title'] == self.a_Title):
-    #             success_title= True
-    #         if r['resource_id']== self.a_resource_id :
-    #             success_id=True
-    #         if (success_id and success_title):
-    #             break
-    #
-    #
-    #     self.assertTrue( success_title, "title not found")
-    #     self.assertTrue( success_id, "id not found")
-    #
-    # def test_get_resource_list_filter_creator(self):
-    #     hs = HydroShare(hostname=self.url)
-    #     res_list = hs.getResourceList(creator=self.creator)
-    #     for (i, r) in enumerate(res_list):
-    #         self.assertEquals(r['creator'], self.creator)
-    #
-    #
-    #
-    #
-    # def test_get_resource_list_filter_date(self):
-    #     hs = HydroShare(hostname=self.url)
-    #     from_date = date(2015, 5, 20)
-    #     res_list = hs.getResourceList(from_date=from_date)
-    #     for (i, r) in enumerate(res_list):
-    #         self.assertTrue(datetime.strptime(r['date_created'], '%m-%d-%Y').date() >= from_date)
-    #
-    #     to_date = date(2015, 5, 21) # up to and including 5/21/2015
-    #     res_list = hs.getResourceList(to_date=to_date)
-    #     for (i, r) in enumerate(res_list):
-    #         self.assertTrue(datetime.strptime(r['date_created'], '%m-%d-%Y').date() < to_date)
-    #
-    #     from_date = date(2015, 5, 19)
-    #     to_date = date(2015, 5, 22) # up to and including 5/21/2015
-    #     res_list = hs.getResourceList(from_date=from_date, to_date=to_date)
-    #     for (i, r) in enumerate(res_list):
-    #         self.assertTrue(datetime.strptime(r['date_created'], '%m-%d-%Y').date() >= from_date)
-    #         self.assertTrue(datetime.strptime(r['date_created'], '%m-%d-%Y').date() < to_date)
-    #
-    # def test_get_resource_list_filter_date(self):
-    #     hs = HydroShare(hostname=self.url)
-    #     from_date = date(2015, 5, 20)
-    #     res_list = hs.getResourceList(from_date=from_date)
-    #     for (i, r) in enumerate(res_list):
-    #         self.assertTrue(datetime.strptime(r['date_created'], '%m-%d-%Y').date() >= from_date)
-    #
-    #     to_date = date(2015, 5, 21) # up to and including 5/21/2015
-    #     res_list = hs.getResourceList(to_date=to_date)
-    #     for (i, r) in enumerate(res_list):
-    #         self.assertTrue(datetime.strptime(r['date_created'], '%m-%d-%Y').date() < to_date)
-    #
-    #     from_date = date(2015, 5, 19)
-    #     to_date = date(2015, 5, 22) # up to and including 5/21/2015
-    #     res_list = hs.getResourceList(from_date=from_date, to_date=to_date)
-    #     for (i, r) in enumerate(res_list):
-    #         self.assertTrue(datetime.strptime(r['date_created'], '%m-%d-%Y').date() >= from_date)
-    #         self.assertTrue(datetime.strptime(r['date_created'], '%m-%d-%Y').date() < to_date)
-    #
-    # def test_get_resource(self):
-    #     hs = HydroShare(hostname=self.url)
-    #     # ideally, look a system metadata, and if file is small, then load it into memory.
-    #
-    #     sysmeta = hs.getSystemMetadata(self.a_resource_id)
-    #     self.assertEqual(sysmeta['resource_id'], self.a_resource_id)
-    #     self.assertEqual(sysmeta['resource_type'], self.a_resource_type)
-    #     self.assertTrue(sysmeta['public'])
-    #
-    #     # if (sysmeta['size']) < 1000000:
-    #     stream = hs.getResource(self.a_resource_id)
-    #     in_memory = StringIO.StringIO()
-    #     for chunk in stream:
-    #         in_memory.write(chunk)
-    #     self.assertTrue( zipfile.is_zipfile(in_memory) )
-    #     with zipfile.ZipFile(in_memory, 'r') as myzip:
-    #         filelist = myzip.infolist()
-    #         success = False
-    #         for f in filelist:
-    #             if self.a_resource_filename in f.filename:
-    #                 success = True
-    #                 break
-    #         self.assertTrue(success, "did not find file")
 
     def _create_resource_without_file(self, hs, abstract, title, keywords, rtype='GenericResource', is_public=False):
         newres = hs.createResource(rtype, title, keywords=keywords, abstract=abstract)
@@ -233,29 +151,10 @@ class TestGetResourceList(unittest.TestCase):
             self.fail("OAuth2 Connection Failed" + str(sys.exc_info()[0]))
         return hs
 
-    def test_get_public_resource_noauth(self):
-        hs = self.get_hs_auth()
 
-         # Create a public resource
-        newres_id = self._create_resource_without_file(hs, abstract='This is a public resource to be fetched noauth',
-                                                       title='My public resource noauth', keywords=('this is public', 'a resource', 'no auth'),
-                                                       is_public=True)
+class TestGetResourceList(HydroShareTestCase):
 
-        hs_noauth = self.get_hs_noauth()
-        # Get public resource as anonymous user
-        try:
-            tmp_dir = tempfile.mkdtemp()
-            hs_noauth.getResource(newres_id, destination=tmp_dir)
-            for f in os.listdir(tmp_dir):
-                if f.endswith('.zip'):
-                    fpath = os.path.join(tmp_dir, f)
-                    self.assertGreater(os.stat(fpath).st_size, 0)
-        finally:
-            shutil.rmtree(tmp_dir)
-
-
-
-# auth tests
+    # auth tests
     def test_get_resource_list_filter_creator_private(self):
         hs = self.get_hs_auth()
 
@@ -282,12 +181,7 @@ class TestGetResourceList(unittest.TestCase):
 
         self.assertGreater(private_count,public_count, "Private("+str(private_count)+") not greater than public("+str(public_count)+") ")
 
-# Create and delete
-# need to setup with a set list
-    #NOTE: If some assertion fails, then you can end up with a created resource.
-    # may need to do a separate set of cases where setUpModule creates, and tearDownModule.
-    # @unittest.skipUnless( os.getcwd().endswith('tests/api') ,
-    #                  "current path needs end with 'tests/api' path is" + os.getcwd() )
+    # Create and delete
     def test_create_get_delete_resource(self):
         hs = self.get_hs_auth()
 
@@ -424,25 +318,39 @@ class TestGetResourceList(unittest.TestCase):
         self.assertGreater(private_count,public_count, "Private("+str(private_count)+") not greater than public("+str(public_count)+") ")
 
 
-#     @with_httmock(mocks.hydroshare.resourceFileCRUD)
-#     def test_create_get_delete_resource_file(self):
-#         hs = HydroShare()
-#         # Add
-#         res_id = '0b047b77767e46c6b6f525a2f386b9fe'
-#         fpath = 'mocks/data/another_resource_file.txt'
-#         fname = os.path.basename(fpath)
-#         resp = hs.addResourceFile(res_id, fpath)
-#         self.assertEqual(resp, res_id)
-#
-#         # Get
-#         tmpdir = tempfile.mkdtemp()
-#         res_file = hs.getResourceFile(res_id, fname, destination=tmpdir)
-#         self.assertTrue(filecmp.cmp(res_file, fpath, shallow=False))
-#         shutil.rmtree(tmpdir)
-#
-#         # Delete
-#         delres = hs.deleteResourceFile(res_id, fname)
-#         self.assertEqual(delres, res_id)
+class TestGetResource(HydroShareTestCase):
+
+    def test_get_public_resource_noauth(self):
+        hs = self.get_hs_auth()
+
+        # Create a public resource
+        res_id = self._create_resource_without_file(hs, abstract='This is a public resource to be fetched noauth',
+                                                    title='My public resource noauth',
+                                                    keywords=('this is public', 'a resource', 'no auth'),
+                                                    is_public=True)
+        # Download without authentication
+        hs_noauth = self.get_hs_noauth()
+        hs_noauth.getResource(res_id, destination=self.tmp_dir)
+        res_file_path = os.path.join(self.tmp_dir, "{res_id}.zip".format(res_id=res_id))
+        self.assertTrue(os.path.exists(res_file_path))
+        self.assertGreater(os.stat(res_file_path).st_size, 0)
+
+    def test_get_private_resource_oauth(self):
+        if self.client_id is None or self.client_secret is None:
+            self.skipTest("OAuth2 client ID/secret not specified.")
+
+        hs = self.get_hs_oauth2()
+
+        # Create a private resource
+        res_id = self._create_resource_without_file(hs, abstract='This is a private resource',
+                                                    title='My private resource',
+                                                    keywords=('this is private', 'a resource'),
+                                                    is_public=False)
+        hs.getResource(res_id, destination=self.tmp_dir)
+        res_file_path = os.path.join(self.tmp_dir, "{res_id}.zip".format(res_id=res_id))
+        self.assertTrue(os.path.exists(res_file_path))
+        self.assertGreater(os.stat(res_file_path).st_size, 0)
+
 
 if __name__ == '__main__':
     unittest.main()
