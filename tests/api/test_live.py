@@ -335,6 +335,10 @@ class TestGetResource(HydroShareTestCase):
         self.assertTrue(os.path.exists(res_file_path))
         self.assertGreater(os.stat(res_file_path).st_size, 0)
 
+        # Get science metadata
+        sci_meta = hs_noauth.getScienceMetadata(res_id)
+        self.assertTrue(sci_meta.startswith('<?xml version="1.0"?>'))
+
     def test_get_private_resource_oauth(self):
         if self.client_id is None or self.client_secret is None:
             self.skipTest("OAuth2 client ID/secret not specified.")
@@ -350,6 +354,10 @@ class TestGetResource(HydroShareTestCase):
         res_file_path = os.path.join(self.tmp_dir, "{res_id}.zip".format(res_id=res_id))
         self.assertTrue(os.path.exists(res_file_path))
         self.assertGreater(os.stat(res_file_path).st_size, 0)
+
+        # Get science metadata
+        sci_meta = hs.getScienceMetadata(res_id)
+        self.assertTrue(sci_meta.startswith('<?xml version="1.0"?>'))
 
 
 if __name__ == '__main__':
