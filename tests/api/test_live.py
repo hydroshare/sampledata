@@ -1,7 +1,7 @@
 # Live tests of hs_restclient
 #
 # How to run locally:
-# USE_HTTPS=True HYDROSHARE=mill24.cep.unc.edu Creator=admin CreatorPassword=default CLIENT_ID=... CLIENT_SECRET=... VERIFY_CERTS=False nosetests test_live
+# USE_HTTPS=True HYDROSHARE=<HOSTNAME> Creator=<USER> CreatorPassword=<PASSWORD> CLIENT_ID=<CLIENTID> CLIENT_SECRET=<CLIENTSECRET> VERIFY_CERTS=False nosetests test_live
 #
 import os, sys
 import StringIO, zipfile
